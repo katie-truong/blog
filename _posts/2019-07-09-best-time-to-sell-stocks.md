@@ -3,7 +3,8 @@ layout: single
 permalink: /stocks/
 title: "Best time to buy and sell stocks"
 ---
-# Best time to buy and sell stocks
+
+## Best time to buy and sell stocks
 
 [Best time to buy and sell stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) is a problem that gets asked a lot in mock and real technical interviews. The problem is very straightforward, however has an optimal solutions and many variations that needs to be paid attention to.
 
@@ -28,3 +29,46 @@ Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
 ```
 
+A simple brute force solution is to compare the profits that we make by buying every stock and selling them every day afterwards to find the maximum:
+
+```
+def maxProfit(prices):
+    maxProfit = 0
+    for i in range(len(prices) - 1):
+        for j in range(i + 1, len(prices)):
+            profit = prices[j] - prices[i]
+            if profit > maxProfit:
+                maxProfit = profit
+    return maxProfit
+```
+
+Time complexity: O(n^2) (nested loop)
+
+Space complexity: O(1) 
+
+### Optimizing:
+
+What is a way to optimize this solution?
+
+Looking at the problem, my initial thought was that we needed to find the minimum price and the maximum price within the array, and find their difference. However, this approach doesn't take into account the order of the days (e.g. when the maximum price appears before the minimum prices). 
+
+A better approach is to keep track of the minimum price, and the max profit. We would only need to go through the array once, to update the minimum price if we find a price lower the minimum price, and update the max profit, if we find a price that, if substracted by the minimum profit, yeilds a profit higher the maximum profit.
+
+This approach brings the time complexity down to O(n) (since we only need to pass through the array once), and solve the index problem (since it's guaranteed that the price that we consider also comes after the minimum price).
+
+
+```
+def maxProfit(self, prices):
+    min_price = sys.maxsize
+    max_profit = 0
+    for price in prices:
+        if price < min_price:
+            min_price = price
+        elif price - min_price > max_profit:
+            max_profit = price - min_price
+return max_profit
+```
+
+Time complexity: O(n) 
+
+Space complexity: O(1) 
