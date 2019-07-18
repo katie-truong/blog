@@ -72,3 +72,34 @@ return max_profit
 Time complexity: O(n) 
 
 Space complexity: O(1) 
+
+## Best time to buy and sell stocks II:
+
+A variant, more realistic version of this problem is that, instead of only buying and selling one stock, we can buy and sell multiple ones. 
+
+The rules are:
+
+- We also need to buy one stock before selling it.
+
+- We can only hold on one stock at once (needs to sell a stock before buying another one).
+
+```
+Input: [7,1,5,3,6,4]
+Output: 7
+Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+             Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+```
+
+```
+Input: [1,2,3,4,5]
+Output: 4
+Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
+             Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are
+             engaging multiple transactions at the same time. You must sell before buying again.
+```
+
+```
+Input: [7,6,4,3,1]
+Output: 0
+Explanation: In this case, no transaction is done, i.e. max profit = 0.
+```
